@@ -7,6 +7,6 @@ export default new Router({
     {
       path: '/',
       name: 'user',
-      component: () => import('../components/User')
+      component: () => import('../Views/User')
     }]
 })

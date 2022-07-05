@@ -1,10 +1,7 @@
-// The Vue build version to load with the `import` command
-// (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import App from './App'
 import router from './router'
 
-// eslint-disable-next-line import/no-duplicates
 import ElementUI, {
   Radio,
   Aside,
@@ -20,19 +17,15 @@ import ElementUI, {
   Col,
   Input,
   Row
-// eslint-disable-next-line import/no-duplicates
+
 } from 'element-ui'
-// eslint-disable-next-line import/no-duplicates,no-unused-vars
-import {Button, Container, Select} from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
-import Common from './components/CommonAside'
-import './assets/less/index.less'
 import store from './store'
 import axios from 'axios'
+import './assets/css/global.css'
 
 Vue.use(ElementUI)
 Vue.use(Radio)
-Vue.use(Container)
 Vue.use(Aside)
 Vue.use(Header)
 Vue.use(Main)
@@ -46,10 +39,6 @@ Vue.use(FormItem)
 Vue.use(Col)
 Vue.use(Input)
 Vue.use(Row)
-Vue.use(Common)
-
-Vue.component(Button.name, Button)
-Vue.component(Select.name, Select)
 
 Vue.config.productionTip = false
 
