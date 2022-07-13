@@ -3,6 +3,8 @@
 // see http://vuejs-templates.github.io/webpack for documentation.
 
 const path = require('path')
+const Vue = require("vue");
+const axios = require("axios");
 
 module.exports = {
   dev: {

@@ -81,6 +81,9 @@
             <el-form-item label="用户名">
               <el-input v-model="form.username" style="width: 80%"></el-input>
             </el-form-item>
+          <el-form-item label="密码">
+            <el-input v-model="form.password" style="width: 80%"></el-input>
+          </el-form-item>
           <el-form-item label="昵称">
             <el-input v-model="form.nickName" style="width: 80%"></el-input>
           </el-form-item>
