@@ -1,0 +1,56 @@
+用户信息表
+CREATE TABLE `user` (
+`id` int(11)  NOT NULL AUTO_INCREMENT COMMENT 'ID',
+`username` VARCHAR(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '用户名',
+`password` VARCHAR(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '密码',
+`nick_name` VARCHAR(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '昵称',
+`age` int(11)  DEFAULT NULL COMMENT '年龄',
+`sex` VARCHAR(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '性别',
+`address` VARCHAR(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '地址',
+PRIMARY KEY(`id`)
+)ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC 
+COMMENT='用户信息表'
+;
+
+
+项目承接表
+CREATE TABLE `undertakeproject` (
+`id` int(11)  NOT NULL AUTO_INCREMENT COMMENT 'ID',
+`project_no` VARCHAR(255)  COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '项目编号',
+`project_name` VARCHAR(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '项目名称',
+`test_system` VARCHAR(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '测试系统',
+`testmanager` VARCHAR(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '测试经理',
+`project_type` VARCHAR(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '项目类型',
+`master_slave` VARCHAR(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '主办协办',
+`development_dep` VARCHAR(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '开发部门',
+`domestic_foreign` VARCHAR(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '境内境外',
+`fp` VARCHAR(1000) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'FP(功能点)',
+`descrip` VARCHAR(1000) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '简介',
+`performance_test` VARCHAR(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '性能测试',
+`safety_test` VARCHAR(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '安全测试',
+`interface_test` VARCHAR(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '接口测试',
+PRIMARY KEY(`id`), UNIQUE (`project_no` ) USING BTREE
+)ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC 
+COMMENT='承接项目'
+;
+
+
+ALTER TABLE undertakeproject DROP COLUMN system;
+
+ALTER TABLE undertakeproject  ADD COLUMN test_system VARCHAR(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '测试系统';
+
+
+项目时间表
+CREATE TABLE `projecttime`(
+`project_no` VARCHAR(255)  COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '项目编号',
+`project_name` VARCHAR(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '项目名称',
+`test_system` VARCHAR(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '测试系统',
+`testmanager` VARCHAR(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '测试经理',
+`test_admit_in` datetime COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '测试准入日期',
+`test_admit_out` datetime COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '测试准出日期',
+`product_time` datetime COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '测试投产日期',
+`complete_status` VARCHAR(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '完成情况',
+UNIQUE(`project_no` ) USING BTREE
+)ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC 
+COMMENT='项目时间'
+;
