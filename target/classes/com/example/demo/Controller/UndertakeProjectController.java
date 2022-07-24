@@ -5,11 +5,13 @@ import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.demo.common.Result;
+import com.example.demo.entity.ProjectTime;
 import com.example.demo.entity.UndertakeProject;
 import com.example.demo.mapper.UndertakeProjectMapper;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @RestController
 @RequestMapping("/undertakeproject")
@@ -49,6 +51,14 @@ public class UndertakeProjectController {
         }
         Page<UndertakeProject> undertakeprojectPage = undertakeprojectMapper.selectPage(new Page<>(pageNum, pageSize), wrapper);
         return Result.success(undertakeprojectPage);
+    }
+
+    // projectNo查询,提供接口给其他页面调用
+    @GetMapping("/projectNo")
+    public Result<?> findProjectNo(@RequestParam(defaultValue = "") String projectNo) {
+        LambdaQueryWrapper<UndertakeProject> wrapper = Wrappers.<UndertakeProject>lambdaQuery();
+        List<UndertakeProject> undertakeProjectsProjectNo = undertakeprojectMapper.selectList(wrapper);
+        return Result.success(undertakeProjectsProjectNo);
     }
 }
 

@@ -19,6 +19,11 @@ export default new Router({
           path: 'springbootUser',
           name: 'SpringBootUser',
           component: () => import('../Views/SpringBootUser')
+        },
+        {
+          path: 'productTime',
+          name: 'productTime',
+          component: () => import('../Views/ProjectTime')
         }
       ]
     },

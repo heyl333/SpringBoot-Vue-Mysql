@@ -240,7 +240,7 @@ export default {
           this.$message(
             {
               type: 'error',
-              message: res.msg
+              message: '删除失败'
             }
           )
         }
@@ -275,7 +275,7 @@ export default {
             this.$message(
               {
                 type: 'error',
-                message: res.msg
+                message: '更新失败'
               }
             )
           }
@@ -293,7 +293,7 @@ export default {
           } else {
             this.$message({
               type: 'error',
-              message: res.msg
+              message: '新增失败'
             })
           }
           this.dialogVisible = false // 关闭弹窗

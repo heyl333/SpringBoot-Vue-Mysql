@@ -1,6 +1,6 @@
 <template>
   <div style="height: 50px;line-height: 50px;border-bottom: 1px solid #ccc;display: flex">
-    <div style="width: 200px;padding-left: 30px;font-weight: bold;color: #3a8ee6">周报项目管理</div>
+    <div style="width: 200px;padding-left: 30px;font-weight: bold;color: #3a8ee6">项目管理系统</div>
     <div style="flex: 1"></div>
     <div style="width: 100px">
       <el-dropdown trigger="click">

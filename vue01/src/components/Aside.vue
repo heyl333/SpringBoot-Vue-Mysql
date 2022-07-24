@@ -2,12 +2,13 @@
   <div>
     <el-menu
       style="width: 200px;min-height: calc(100vh - 50px)"
-      default-active="1"
+      :default-active="path"
       class="el-menu-vertical-demo"
       router
       @open="handleOpen"
       @close="handleClose">
-      <!--  default-active可设置哪个index高亮    -->
+<!--   :default-active,这里的 :是v-bind的缩写，用于动态绑定data里边的变量    -->
+      <!--  default-active可设置哪个index高亮，这里设置跳转到相应路径时index对应路径的label高亮    -->
       <!--  router可用于设置页面跳转，此时就不需要在组件里边写 @click=‘router.push’  -->
 <!--      项目管理栏-->
       <el-submenu index="1">
@@ -15,9 +16,9 @@
           <i class="el-icon-location"></i>
           <span>项目管理</span>
         </template>
-        <el-menu-item index="undertakeProjects">项目承接</el-menu-item>
-        <el-menu-item index="1-2" >项目时间</el-menu-item>
-        <el-menu-item index="1-3" >项目进展</el-menu-item>
+        <el-menu-item index="/undertakeProjects">项目承接</el-menu-item>
+        <el-menu-item index="/productTime" >项目时间</el-menu-item>
+        <el-menu-item index="1-3" >项目进度</el-menu-item>
         <el-menu-item index="1-4" >项目人员及工作量</el-menu-item>
       </el-submenu>
 <!--      人员信息栏-->
@@ -43,7 +44,7 @@
           <i class="el-icon-user"></i>
           <span>用户管理</span>
         </template>
-        <el-menu-item index="springbootUser" >用户管理</el-menu-item>
+        <el-menu-item index="/springbootUser" >用户管理</el-menu-item>
       </el-submenu>
     </el-menu>
   </div>
@@ -59,6 +60,13 @@ export default {
     handleClose () {
 
     }
+  },
+  data () {
+    return {
+      path: this.$route.path // 设置默认高亮的菜单
+    }
+  },
+  created () { // 钩子函数
   }
 }
 </script>
