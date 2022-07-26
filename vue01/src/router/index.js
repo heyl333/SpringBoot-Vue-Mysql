@@ -24,6 +24,11 @@ export default new Router({
           path: 'productTime',
           name: 'productTime',
           component: () => import('../Views/ProjectTime')
+        },
+        {
+          path: 'productProgress',
+          name: 'productProgress',
+          component: () => import('../Views/ProjectProgress')
         }
       ]
     },

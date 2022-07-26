@@ -7,7 +7,6 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.demo.common.Result;
 import com.example.demo.entity.ProjectTime;
-import com.example.demo.entity.UndertakeProject;
 import com.example.demo.mapper.ProductTimeMapper;
 import org.springframework.web.bind.annotation.*;
 
@@ -38,7 +37,15 @@ public class ProductTimeController {
         try {
             UpdateWrapper<ProjectTime> updatewrap = new UpdateWrapper<>();
             updatewrap.eq("project_no",projecttime.getProjectNo());
-            projecttimeMapper.update(projecttime,updatewrap);
+            updatewrap.set("project_name",projecttime.getProjectName());
+            updatewrap.set("test_system",projecttime.getTestSystem());
+            updatewrap.set("testmanager",projecttime.getTestmanager());
+            updatewrap.set("test_admit_in",projecttime.getTestAdmitIn());
+            updatewrap.set("test_admit_out",projecttime.getTestAdmitOut());
+            updatewrap.set("product_time",projecttime.getProductTime());
+            updatewrap.set("complete_status",projecttime.getCompleteStatus());
+
+            projecttimeMapper.update(null,updatewrap);
             return Result.success();
         } catch (Exception e) {
             return Result.error("-2","更新失败");
@@ -80,6 +87,9 @@ public class ProductTimeController {
             LambdaQueryWrapper<ProjectTime> wrapper = Wrappers.<ProjectTime>lambdaQuery();
             wrapper.eq(ProjectTime::getProjectNo,projectNo);
             List<ProjectTime> projectTimesProjectNo = projecttimeMapper.selectList(wrapper);
+            if (projectTimesProjectNo.size() < 1) {
+                return Result.error("-4","查询失败"); // 查询不到数据
+            }
             return Result.success(projectTimesProjectNo);
         } catch ( Exception e) {
             return Result.error("-4","查询失败");

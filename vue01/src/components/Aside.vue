@@ -18,7 +18,7 @@
         </template>
         <el-menu-item index="/undertakeProjects">项目承接</el-menu-item>
         <el-menu-item index="/productTime" >项目时间</el-menu-item>
-        <el-menu-item index="1-3" >项目进度</el-menu-item>
+        <el-menu-item index="/productProgress" >项目进度</el-menu-item>
         <el-menu-item index="1-4" >项目人员及工作量</el-menu-item>
       </el-submenu>
 <!--      人员信息栏-->
