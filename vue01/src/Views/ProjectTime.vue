@@ -258,8 +258,7 @@ export default {
         this.form.projectNo = this.projectInfo[0] // 获取projecctNo
         this.form.projectName = this.projectInfo[1] // 获取projecctName
       }
-      console.log('this.form.projectNo')
-      console.log(this.form.projectNo)
+
       // 判断当前的projectNo是否存在于projecttime表
       this.$axios.get('api/projecttime/projectNo/' + this.form.projectNo).then(res => {
         // res.data.code === '0'说明已有projectNo，更新；否则，新增

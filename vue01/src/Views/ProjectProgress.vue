@@ -36,7 +36,7 @@
       >
       </el-table-column>
       <el-table-column
-        prop="completedStatus"
+        prop="completeStatus"
         label="完成情况"
       >
       </el-table-column>
@@ -72,37 +72,60 @@
             <el-col :span="8">
               <el-form-item label="项目编号" >
                 <!--                利用数组[]，可以实现绑定多个值-->
-                <el-select   v-model="projectInfo" placeholder="项目编号" style="float: left;width: 80%">
-                  <el-option v-for="item in options_projectNo" :key="item.id" :label="item.projectNo" :value="[item.projectNo , item.projectName]"></el-option>
-                </el-select>
+                <!--             新增时，从projectInfo取值   -->
+                <template v-if="this.options_projectNo.length >=1">
+                  <el-select   v-model="projectInfo" placeholder="项目编号" style="float: left">
+                    <el-option v-for="item in this.options_projectNo" :key="item.id" :label="item.projectNo" :value="[item.projectNo , item.projectName,item.testSystem,item.testmanager]"></el-option>
+                  </el-select>
+                </template>
+                <!--            更新时，项目名称从this.form取值-->
+                <template v-else>
+                  <el-select   v-model="this.form.projectNo" placeholder="项目编号" style="float: left" disabled="true">
+                    <el-option  :key="this.form.projectNo" :label="this.form.projectNo" :value="this.form.projectName"></el-option>
+                  </el-select>
+                </template>
               </el-form-item>
             </el-col>
 
             <el-col :span="16">
               <el-form-item label="项目名称">
-                <!--                希望实现的功能，projectName根据projectNo自动反显；利用v-model的双向绑定功能-->
-                <el-input  v-model="projectInfo[1]" style="float: left;width: 91.5%" disabled="true">
-                </el-input>
+                <!--             希望实现的功能，projectName根据projectNo自动反显；利用v-model的双向绑定功能-->
+                <!--             更新时，从projectInfo取值   -->
+                <template v-if="projectInfo.length > 1">
+                  <el-input  v-model="projectInfo[1]" suffix-icon="el-icon-project"></el-input>
+                </template>
+                <!--            更新时，项目名称从this.form取值-->
+                <template v-else>
+                  <el-input  v-model="this.form.projectName" suffix-icon="el-icon-project" :disabled="true"></el-input>
+                </template>
               </el-form-item>
             </el-col>
           </el-row>
           <el-row inline="true">
             <el-col :span="8">
               <el-form-item label="测试系统" >
-                <el-select  v-model="form.testSystem" placeholder="测试系统" style="float: left;width: 80%">
-                  <el-option  label="OIBS" value="OIBS"></el-option>
-                  <el-option  label="ITS"  value="ITS"></el-option>
-                  <el-option  label="PAIC" value="PAIC"></el-option>
-                </el-select>
+                <template v-if="projectInfo.length > 1">
+                  <el-select  v-model="projectInfo[2]" placeholder="测试系统" style="float: left;width: 80%" disabled="true">
+                  </el-select>
+                </template>
+                <template v-else>
+                  <el-select  v-model="this.form.testSystem" placeholder="测试系统" style="float: left;width: 80%" disabled="true">
+                  </el-select>
+                </template>
+
               </el-form-item>
             </el-col>
             <el-col :span="8">
               <el-form-item label="测试经理">
-                <el-select v-model="form.testmanager" placeholder="测试经理" style="float: left;width: 80%">
-                  <el-option label="TestManager1" value="TestManager1"></el-option>
-                  <el-option label="TestManager2" value="TestManager2"></el-option>
-                  <el-option label="TestManager3" value="TestManager3"></el-option>
-                </el-select>
+                <template v-if="projectInfo.length > 1">
+                  <el-select v-model="projectInfo[3]" placeholder="测试经理" style="float: left;width: 80%" disabled="true">
+                  </el-select>
+                </template>
+                <template v-else>
+                  <el-select  v-model="this.form.testmanager" placeholder="测试经理" style="float: left;width: 80%" disabled="true">
+                  </el-select>
+                </template>
+
               </el-form-item>
             </el-col>
             <el-col :span="8">
@@ -421,6 +444,8 @@ export default {
       return ''
     },
     handleEdit (row) {
+      this.options_projectNo = []
+      this.projectInfo = []
       this.form = JSON.parse(JSON.stringify(row))
       this.dialogVisible = true
     },
@@ -460,7 +485,6 @@ export default {
       this.dialogVisible = true
       this.form = {}
       this.projectInfo = [] // 重新将projectInfo置空
-      this.projectnoExit = ''
       // 获取undertake的projectNo(可以优化，不必每次都去获取)
       this.$axios.get('/api/undertakeproject/projectNo').then((res) => {
         // console.log(res)
@@ -472,56 +496,56 @@ export default {
       // 提交前需要将projectNo和projectName赋值到form里边；
       // 补充对projectNo的校验：为空报错；
       // console.log(this.projectInfo)
-      this.form.projectNo = this.projectInfo[0] // 获取projecctNo
-      this.form.projectName = this.projectInfo[1] // 获取projecctName
-      // this.form.abnolmalCaseRate = abnolmalCaseRate
+      if (this.projectInfo.length > 1) {
+        this.form.projectNo = this.projectInfo[0] // 获取projecctNo
+        this.form.projectName = this.projectInfo[1] // 获取projecctName
+        this.form.testSystem = this.projectInfo[2] // 获取projecctName
+        this.form.testmanager = this.projectInfo[3] // 获取projecctName
+      }
 
       // 判断当前的projectNo是否存在于projectprogress表
       this.$axios.get('api/projectprogress/projectNo/' + this.form.projectNo).then(res => {
-        this.projectnoExit = res.data.code // 如果projectnoExit为0，说明数据库有该projectNo，此时修改，否则新增
-      })
-      // console.log('projectNo')
-      // console.log(this.projectnoExit)
-      if (this.projectnoExit === '0') { // 更新
-        this.$axios.put('/api/projectprogress', this.form).then(res => {
-          // console.log(res)
-          if (res.data.code === '0') {
-            this.$message(
-              {
+        if (res.data.code === '0') { // 更新
+          this.$axios.put('/api/projectprogress', this.form).then(res => {
+            // console.log(res)
+            if (res.data.code === '0') {
+              this.$message(
+                {
+                  type: 'success',
+                  message: '更新成功'
+                }
+              )
+            } else {
+              this.$message(
+                {
+                  type: 'error',
+                  message: res.data.msg
+                }
+              )
+            }
+            this.dialogVisible = false // 关闭弹窗
+            this.load() // 刷新页面
+          })
+        } else { // 新增
+          // console.log('start add')
+          this.$axios.post('/api/projectprogress', this.form).then(res => {
+            // console.log(res)
+            if (res.data.code === '0') {
+              this.$message({
                 type: 'success',
-                message: '更新成功'
-              }
-            )
-          } else {
-            this.$message(
-              {
+                message: '新增成功'
+              })
+            } else {
+              this.$message({
                 type: 'error',
                 message: res.data.msg
-              }
-            )
-          }
-          this.dialogVisible = false // 关闭弹窗
-          this.load() // 刷新页面
-        })
-      } else { // 新增
-        // console.log('start add')
-        this.$axios.post('/api/projectprogress', this.form).then(res => {
-          // console.log(res)
-          if (res.data.code === '0') {
-            this.$message({
-              type: 'success',
-              message: '新增成功'
-            })
-          } else {
-            this.$message({
-              type: 'error',
-              message: res.data.msg
-            })
-          }
-          this.dialogVisible = false // 关闭弹窗
-          this.load() // 刷新页面
-        })
-      }
+              })
+            }
+            this.dialogVisible = false // 关闭弹窗
+            this.load() // 刷新页面
+          })
+        }
+      })
     },
     //  用于页面加载时，将数据库数据载入
     load () {
@@ -700,8 +724,7 @@ export default {
       dialogVisible: false,
       form: {},
       options_projectNo: [],
-      projectInfo: [], // 接受undertakeProject传过来的项目信息，用于select选择ProjectNo后，绑定projectNo和projectName; save时，需要重新设置form的projectNo和projectName
-      projectnoExit: '' // 用于判断projectNo是否在projectprogress表当前的projectNo字段内；在，修改；不在，新增
+      projectInfo: [] // 接受undertakeProject传过来的项目信息，用于select选择ProjectNo后，绑定projectNo和projectName; save时，需要重新设置form的projectNo和projectName
     }
   }
 }

@@ -7,7 +7,7 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.demo.common.Result;
 import com.example.demo.entity.ProjectTime;
-import com.example.demo.mapper.ProductTimeMapper;
+import com.example.demo.mapper.ProjectTimeMapper;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -15,9 +15,9 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/projecttime")
-public class ProductTimeController {
+public class ProjectTimeController {
     @Resource
-    ProductTimeMapper projecttimeMapper;
+    ProjectTimeMapper projecttimeMapper;
 
     // 用户新增
     @PostMapping
