@@ -44,10 +44,18 @@ public class UndertakeProjectController {
     @GetMapping
     public Result<?> findPage(@RequestParam(defaultValue = "1") Integer pageNum,
                               @RequestParam(defaultValue = "10") Integer pageSize,
-                              @RequestParam(defaultValue = "") String search) {
+                              @RequestParam(defaultValue = "") String searchProjectNo,
+                              @RequestParam(defaultValue = "") String searchProjectName,
+                              @RequestParam(defaultValue = "") String searchProjectType) {
         LambdaQueryWrapper<UndertakeProject> wrapper = Wrappers.<UndertakeProject>lambdaQuery();
-        if (StringUtils.isNotBlank(search)) {
-            wrapper.like(UndertakeProject::getProjectNo, search);
+        if (StringUtils.isNotBlank(searchProjectNo)) {
+            wrapper.like(UndertakeProject::getProjectNo, searchProjectNo);
+        }
+        if (StringUtils.isNotBlank(searchProjectName)) {
+            wrapper.like(UndertakeProject::getProjectName, searchProjectName);
+        }
+        if (StringUtils.isNotBlank(searchProjectType)) {
+            wrapper.like(UndertakeProject::getProjectType, searchProjectType);
         }
         Page<UndertakeProject> undertakeprojectPage = undertakeprojectMapper.selectPage(new Page<>(pageNum, pageSize), wrapper);
         return Result.success(undertakeprojectPage);

@@ -8,7 +8,12 @@
     </div>
 
     <div style="margin: 10px 0">
-      <el-input v-model="search" placeholder="请输入内容" style="width: 20%" clearable></el-input>
+      项目编号
+      <el-input v-model="searchProjectNo" placeholder="请输入内容" style="width: 20%;margin-right: 30px" clearable></el-input>
+      项目名称
+      <el-input v-model="searchProjectName" placeholder="请输入内容" style="width: 20%;margin-right: 30px" clearable></el-input>
+      测试经理
+      <el-input v-model="searchTestmanager" placeholder="请输入内容" style="width: 20%;margin-right: 30px" clearable></el-input>
       <el-button type="primary" style="margin-left: 5px" @click="load">搜索</el-button>
     </div>
     <el-table
@@ -553,7 +558,10 @@ export default {
         { params: {
           pageNum: this.currentPage,
           pageSize: this.pageSize,
-          search: this.search}
+          searchProjectNo: this.searchProjectNo,
+          searchProjectName: this.searchProjectName,
+          searchTestmanager: this.searchTestmanager
+        }
         }
       ).then(res => {
         // console.log(res)
@@ -714,7 +722,9 @@ export default {
   },
   data () {
     return {
-      search: '',
+      searchProjectNo: '',
+      searchProjectName: '',
+      searchTestmanager: '',
       tableData: [
 
       ],

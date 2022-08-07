@@ -71,10 +71,18 @@ public class ProjectTimeController {
     @GetMapping
     public Result<?> findPage(@RequestParam(defaultValue = "1") Integer pageNum,
                               @RequestParam(defaultValue = "10") Integer pageSize,
-                              @RequestParam(defaultValue = "") String search) {
+                              @RequestParam(defaultValue = "") String searchProjectNo,
+                              @RequestParam(defaultValue = "") String searchProjectName,
+                              @RequestParam(defaultValue = "") String searchTestmanager) {
         LambdaQueryWrapper<ProjectTime> wrapper = Wrappers.<ProjectTime>lambdaQuery();
-        if (StringUtils.isNotBlank(search)) {
-            wrapper.like(ProjectTime::getProjectNo, search);
+        if (StringUtils.isNotBlank(searchProjectNo)) {
+            wrapper.like(ProjectTime::getProjectNo, searchProjectNo);
+        }
+        if (StringUtils.isNotBlank(searchProjectName)) {
+            wrapper.like(ProjectTime::getProjectName, searchProjectName);
+        }
+        if (StringUtils.isNotBlank(searchTestmanager)) {
+            wrapper.like(ProjectTime::getTestmanager, searchTestmanager);
         }
         Page<ProjectTime> projecttimePage = projecttimeMapper.selectPage(new Page<>(pageNum, pageSize), wrapper);
         return Result.success(projecttimePage);

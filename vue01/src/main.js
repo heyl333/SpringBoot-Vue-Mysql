@@ -24,6 +24,11 @@ import store from './store'
 import './assets/css/global.css'
 import axios from 'axios'
 
+// Vue.use(Docxtemplater)
+// Vue.use(saveAs)
+// Vue.use(PizZip)
+// Vue.use(JSZipUtils)
+
 Vue.use(ElementUI)
 Vue.use(Radio)
 Vue.use(Aside)

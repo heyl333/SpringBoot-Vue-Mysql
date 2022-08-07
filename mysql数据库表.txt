@@ -54,3 +54,55 @@ UNIQUE(`project_no` ) USING BTREE
 )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC 
 COMMENT='项目时间'
 ;
+
+项目进度表
+CREATE TABLE `projectprogress`(
+`project_no` VARCHAR(255)  COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '项目编号',
+`project_name` VARCHAR(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '项目名称',
+`test_system` VARCHAR(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '测试系统',
+`testmanager` VARCHAR(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '测试经理',
+`complete_status` VARCHAR(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '完成情况',
+`total_case_number0` int(11) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '冒烟总用例数',
+`abnolmal_case_number0` int(11) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '冒烟反向用例数',
+`carry_out_number0` int(11) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '冒烟已执行用例数',
+`pass_case_number0` int(11) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '冒烟通过用例数',
+`total_bugs0` int(11) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '冒烟累计缺陷数',
+`solved_bugs0` int(11) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '冒烟解决缺陷数',
+`test_person_number0` int(11) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '冒烟测试人数',
+`project_period0` int(11) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '冒烟周期（月）',
+`total_case_number1` int(11) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '第一批总用例数',
+`abnolmal_case_number1` int(11) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '第一批反向用例数',
+`carry_out_number1` int(11) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '第一批已执行用例数',
+`pass_case_number1` int(11) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '第一批通过用例数',
+`total_bugs1` int(11) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '第一批累计缺陷数',
+`solved_bugs1` int(11) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '第一批解决缺陷数',
+`test_person_number1` int(11) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '第一批测试人数',
+`project_period1` int(11) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '第一批周期（月）',
+`total_case_number2` int(11) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '第二批总用例数',
+`abnolmal_case_number2` int(11) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '第二批反向用例数',
+`carry_out_number2` int(11) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '第二批已执行用例数',
+`pass_case_number2` int(11) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '第二批通过用例数',
+`total_bugs2` int(11) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '第二批累计缺陷数',
+`solved_bugs2` int(11) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '第二批解决缺陷数',
+`test_person_number2` int(11) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '第二批测试人数',
+`project_period2` int(11) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '第二批周期（月）',
+UNIQUE(`project_no` ) USING BTREE
+)ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC 
+COMMENT='项目进度'
+;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

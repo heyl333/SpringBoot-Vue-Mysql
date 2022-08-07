@@ -42,10 +42,14 @@ public class UserController {
     @GetMapping
     public Result<?> findPage (@RequestParam(defaultValue = "1") Integer pageNum,
                                @RequestParam(defaultValue = "10") Integer pageSize,
-                               @RequestParam(defaultValue = "") String search) {
+                               @RequestParam(defaultValue = "") String searchUsername,
+                               @RequestParam(defaultValue = "") String searchNickname) {
         LambdaQueryWrapper<User> wrapper = Wrappers.<User>lambdaQuery();
-        if (StringUtils.isNotBlank(search)) {
-            wrapper.like(User::getNickName,search);
+        if (StringUtils.isNotBlank(searchUsername)) {
+            wrapper.like(User::getUsername,searchUsername);
+        }
+        if (StringUtils.isNotBlank(searchNickname)) {
+            wrapper.like(User::getNickName,searchNickname);
         }
         Page<User> userPage = userMapper.selectPage(new Page<>(pageNum, pageSize), wrapper);
         return Result.success(userPage);

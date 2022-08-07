@@ -1,9 +1,12 @@
 package com.example.demo.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
+
+import java.util.List;
 
 @TableName("undertakeproject")
 @Data
@@ -23,4 +26,7 @@ public class UndertakeProject {
     private String performanceTest;
     private String safetyTest;
     private String interfaceTest;
+
+    @TableField(exist = false)
+    private List<ProjectTime> projectTimes;
 }

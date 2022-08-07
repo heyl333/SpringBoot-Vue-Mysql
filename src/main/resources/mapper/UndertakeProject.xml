@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.UndertakeProjectMapper">
+
+    <resultMap id="undertakeProMap" type="com.example.demo.entity.UndertakeProject">
+        <result property="id" column="id"/>
+        <result property="projectNo" column="project_no"/>
+        <result property="projectName" column="project_name"/>
+        <result property="testSystem" column="test_system"/>
+        <result property="testmanager" column="testmanager"/>
+        <result property="projectType" column="project_type"/>
+        <result property="masterSlave" column="master_slave"/>
+        <result property="developmentDep" column="development_dep"/>
+        <result property="domesticForeign" column="domestic_foreign"/>
+        <result property="fp" column="fp"/>
+        <result property="descrip" column="descrip"/>
+        <result property="performanceTest" column="performance_test"/>
+        <result property="safetyTest" column="safety_test"/>
+        <result property="interfaceTest" column="interface_test"/>
+        <collection property="projectTimes" javaType="ArrayList" ofType="com.example.demo.entity.ProjectTime">
+            <result column="t_product_time" property="productTime" />
+<!--            <result column="t_test_admit_out" property="testAdmitOut" />-->
+<!--            <result column="t_complete_status" property="completeStatus" />-->
+        </collection>
+    </resultMap>
+
+    <select id="findProTime" resultMap="undertakeProMap">
+        SELECT `undertakeproject`.* ,DATE_FORMAT(projecttime.product_time,'%Y-%m-%d')  as t_product_time from `undertakeproject`
+        left join `projecttime` on undertakeproject.project_no = projecttime.project_no where `projecttime`.product_time
+            between concat(#{productTime},'-01-01') and concat(#{productTime},'-12-31')
+    </select>
+</mapper>

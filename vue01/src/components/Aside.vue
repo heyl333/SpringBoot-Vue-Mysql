@@ -19,7 +19,7 @@
         <el-menu-item index="/undertakeProjects">项目承接</el-menu-item>
         <el-menu-item index="/productTime" >项目时间</el-menu-item>
         <el-menu-item index="/productProgress" >项目进度</el-menu-item>
-        <el-menu-item index="1-4" >项目人员及工作量</el-menu-item>
+<!--        <el-menu-item index="1-4" >项目人员及工作量</el-menu-item>-->
       </el-submenu>
 <!--      人员信息栏-->
       <el-submenu index="2">
@@ -36,7 +36,7 @@
           <i class="el-icon-menu"></i>
           <span>项目展示</span>
         </template>
-        <el-menu-item index="3-1" >项目信息展示</el-menu-item>
+        <el-menu-item index="/projectDisplay" >项目信息展示</el-menu-item>
       </el-submenu>
 <!--      用户管理（管理员权限）-->
       <el-submenu index="4">

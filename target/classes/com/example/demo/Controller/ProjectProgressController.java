@@ -92,10 +92,18 @@ public class ProjectProgressController {
     @GetMapping
     public Result<?> findPage(@RequestParam(defaultValue = "1") Integer pageNum,
                               @RequestParam(defaultValue = "10") Integer pageSize,
-                              @RequestParam(defaultValue = "") String search) {
+                              @RequestParam(defaultValue = "") String searchProjectNo,
+                              @RequestParam(defaultValue = "") String searchProjectName,
+                              @RequestParam(defaultValue = "") String searchTestmanager) {
         LambdaQueryWrapper<ProjectProgress> wrapper = Wrappers.<ProjectProgress>lambdaQuery();
-        if (StringUtils.isNotBlank(search)) {
-            wrapper.like(ProjectProgress::getProjectNo, search);
+        if (StringUtils.isNotBlank(searchProjectNo)) {
+            wrapper.like(ProjectProgress::getProjectNo, searchProjectNo);
+        }
+        if (StringUtils.isNotBlank(searchProjectName)) {
+            wrapper.like(ProjectProgress::getProjectName, searchProjectName);
+        }
+        if (StringUtils.isNotBlank(searchTestmanager)) {
+            wrapper.like(ProjectProgress::getTestmanager, searchTestmanager);
         }
         Page<ProjectProgress> projecttimePage = projectprogressMapper.selectPage(new Page<>(pageNum, pageSize), wrapper);
         return Result.success(projecttimePage);

@@ -29,6 +29,11 @@ export default new Router({
           path: 'productProgress',
           name: 'productProgress',
           component: () => import('../Views/ProjectProgress')
+        },
+        {
+          path: 'projectDisplay',
+          name: 'projectDisplay',
+          component: () => import('../Views/ProjectDisplay')
         }
       ]
     },

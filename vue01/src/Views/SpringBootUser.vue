@@ -7,7 +7,10 @@
     </div>
 
     <div style="margin: 10px 0">
-      <el-input v-model="search" placeholder="请输入内容" style="width: 20%" clearable></el-input>
+      用户名
+      <el-input  v-model="searchUsername" placeholder="请输入内容" style="width: 20%;margin-right: 30px" clearable></el-input>
+      昵称
+      <el-input  v-model="searchNickname" placeholder="请输入内容" style="width: 20%;margin-right: 30px" clearable ></el-input>
       <el-button type="primary" style="margin-left: 5px" @click="load">搜索</el-button>
     </div>
     <el-table
@@ -220,7 +223,9 @@ export default {
         { params: {
           pageNum: this.currentPage,
           pageSize: this.pageSize,
-          search: this.search}
+          searchUsername: this.searchUsername,
+          searchNickname: this.searchNickname
+        }
         }
       ).then(res => {
         console.log(res)
@@ -248,7 +253,8 @@ export default {
   },
   data () {
     return {
-      search: '',
+      searchUsername: '',
+      searchNickname: '',
       tableData: [
 
       ],
